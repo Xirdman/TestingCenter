@@ -7,7 +7,7 @@ import com.testingcenter.model.Student;
 import com.testingcenter.model.Test;
 
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -51,12 +51,11 @@ public class StudentMenu {
     }
 
     private static void printTests(Student student) {
-        LinkedList<Test> studentTests = StudentContoller.getStudentTests(student);
+        List<Test> studentTests = new StudentContoller().getStudentTests(student);
         Iterator<Test> iterator = studentTests.iterator();
         while (iterator.hasNext()) {
             Test test = iterator.next();
-            System.out.print(test.getName() + " " + TestController.getQuestionNumber(test));
-
+            System.out.print(test.getName() + " " + new TestController().getQuestionNumber(test));
         }
     }
 }

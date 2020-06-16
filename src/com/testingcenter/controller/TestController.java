@@ -1,6 +1,5 @@
 package com.testingcenter.controller;
 
-import com.testingcenter.Main;
 import com.testingcenter.model.Assignment;
 import com.testingcenter.model.Teacher;
 import com.testingcenter.model.Test;
@@ -20,9 +19,9 @@ public class TestController {
      * @param teacher Teacher who make test
      * @return List of tests created by teacher
      */
-    public static List<Test> getTeachersTests(Teacher teacher) {
-        List<Test> tests = Main.getTests();
-        List<Test> result = new LinkedList<Test>();
+    public List<Test> getTeachersTests(Teacher teacher) {
+        List<Test> tests = Repository.getTests();
+        List<Test> result = new LinkedList<>();
         Iterator<Test> iterator = tests.iterator();
         while (iterator.hasNext()) {
             Test test = iterator.next();
@@ -39,10 +38,10 @@ public class TestController {
      * @param test Test to get results
      * @return String with progress of test
      */
-    public static String getTestResults(Test test) {
+    public String getTestResults(Test test) {
         int allTests = 0;
         int completedTests = 0;
-        List<Assignment> assignments = Main.getAssignments();
+        List<Assignment> assignments = Repository.getAssignments();
         Iterator<Assignment> iterator = assignments.iterator();
         while (iterator.hasNext()) {
             Assignment assignment = iterator.next();
@@ -64,9 +63,9 @@ public class TestController {
      * @param test Test to know how many number of questions
      * @return number of questions
      */
-    public static int getQuestionNumber(Test test) {
+    public int getQuestionNumber(Test test) {
         int i = 0;
-        List<TestQuestion> questions = Main.getQuestions();
+        List<TestQuestion> questions = Repository.getQuestions();
         Iterator<TestQuestion> iterator = questions.iterator();
         while (iterator.hasNext()) {
             TestQuestion question = iterator.next();

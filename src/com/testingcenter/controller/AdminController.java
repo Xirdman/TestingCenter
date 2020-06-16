@@ -1,6 +1,5 @@
 package com.testingcenter.controller;
 
-import com.testingcenter.Main;
 import com.testingcenter.model.User;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public class AdminController {
      *
      * @return List of users registered in system
      */
-    public static List<User> getUsers() {
-        return Main.getUsers();
+    public List<User> getUsers() {
+        return Repository.getUsers();
     }
 }

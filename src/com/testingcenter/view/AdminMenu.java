@@ -51,11 +51,12 @@ public class AdminMenu {
     }
 
     private static void showUsersList() {
-        List<User> users = AdminController.getUsers();
+        List<User> users = new AdminController().getUsers();
         Iterator<User> iterator = users.iterator();
         while (iterator.hasNext()) {
             User user = iterator.next();
             System.out.println(user.getFirstName() + " " + user.getLastName() + " " + user.getClass().getSimpleName());
         }
+        System.out.println();
     }
 }

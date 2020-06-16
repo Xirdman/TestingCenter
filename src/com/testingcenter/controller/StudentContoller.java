@@ -1,6 +1,5 @@
 package com.testingcenter.controller;
 
-import com.testingcenter.Main;
 import com.testingcenter.model.Assignment;
 import com.testingcenter.model.Student;
 import com.testingcenter.model.Test;
@@ -19,9 +18,9 @@ public class StudentContoller {
      * @param student Student to find a tests
      * @return List of student uncomplited tests
      */
-    public static LinkedList<Test> getStudentTests(Student student) {
-        LinkedList<Test> studentTests = new LinkedList<Test>();
-        List<Assignment> assignments = Main.getAssignments();
+    public List<Test> getStudentTests(Student student) {
+        List<Test> studentTests = new LinkedList<>();
+        List<Assignment> assignments = Repository.getAssignments();
         Iterator<Assignment> iterator = assignments.iterator();
         while (iterator.hasNext()) {
             Assignment assignment = iterator.next();

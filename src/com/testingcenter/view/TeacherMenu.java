@@ -50,12 +50,13 @@ public class TeacherMenu {
     }
 
     private static void displayTeachersTests(Teacher teacher) {
-        List<Test> tests = TestController.getTeachersTests(teacher);
+        TestController testController = new TestController();
+        List<Test> tests = testController.getTeachersTests(teacher);
         Iterator<Test> iterator = tests.iterator();
         while (iterator.hasNext()) {
             Test test = iterator.next();
             System.out.print("Test - " + test.getName() + "\n");
-            System.out.print(TestController.getTestResults(test) + " \n");
+            System.out.print(testController.getTestResults(test) + " \n");
         }
         System.out.println();
     }
