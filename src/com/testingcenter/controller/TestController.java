@@ -75,4 +75,23 @@ public class TestController {
         }
         return i;
     }
+
+    /**
+     * Method to get maximum points depends on tests questions
+     *
+     * @param test test we want to know points
+     * @return maximum points student cant get from this test
+     */
+    public int getTestMaxPoints(Test test) {
+        int points = 0;
+        List<TestQuestion> testQuestions = Repository.getQuestions();
+        Iterator<TestQuestion> iterator = testQuestions.iterator();
+        while (iterator.hasNext()) {
+            TestQuestion testQuestion = iterator.next();
+            if (testQuestion.getQuestionTest() == test) {
+                points += testQuestion.getPoints();
+            }
+        }
+        return points;
+    }
 }

@@ -1,7 +1,10 @@
 package com.testingcenter.view;
 
 import com.testingcenter.Main;
+import com.testingcenter.controller.GroupController;
 import com.testingcenter.controller.TestController;
+import com.testingcenter.model.Group;
+import com.testingcenter.model.StudentRatingDto;
 import com.testingcenter.model.Teacher;
 import com.testingcenter.model.Test;
 
@@ -21,8 +24,10 @@ public class TeacherMenu {
     public static void showFirstScreen(Teacher teacher) {
         System.out.print("Choose options you want to do \n");
         System.out.print("1 - Watch tests and results \n");
-        System.out.print("2 - Log out \n");
-        System.out.print("3 - Exit \n");
+        System.out.println("2 - Print groups");
+        System.out.println("3 - Print group results");
+        System.out.print("4 - Log out \n");
+        System.out.print("5 - Exit \n");
         Scanner scanner = new Scanner(System.in);
         int i = 0;
         try {
@@ -37,9 +42,17 @@ public class TeacherMenu {
                 showFirstScreen(teacher);
                 break;
             case 2:
+                printGroups();
+                showFirstScreen(teacher);
+                break;
+            case 4:
                 Main.showWelcomeScreen();
                 break;
             case 3:
+                printMessageBeforeRaiting();
+                showFirstScreen(teacher);
+                break;
+            case 5:
                 scanner.close();
                 System.exit(0);
                 break;
@@ -57,6 +70,37 @@ public class TeacherMenu {
             Test test = iterator.next();
             System.out.print("Test - " + test.getName() + "\n");
             System.out.print(testController.getTestResults(test) + " \n");
+        }
+        System.out.println();
+    }
+
+    private static void printMessageBeforeRaiting() {
+        System.out.println("Enter the identificator of group to print");
+        Scanner scanner = new Scanner(System.in);
+        int groupId = Integer.parseInt(scanner.next());
+        if (new GroupController().isGroupExists(groupId)) {
+            printGroupRaitingDesc(groupId);
+        }
+        System.out.println();
+    }
+
+    private static void printGroupRaitingDesc(int groupId) {
+        System.out.println(groupId + " raitings are:");
+        List<StudentRatingDto> list = new GroupController().getGroupRaitings(groupId);
+        Iterator<StudentRatingDto> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            StudentRatingDto dto = iterator.next();
+            System.out.print(dto.getStudent().getFirstName() + " с рейтингом " + dto.getRating() + "\n");
+        }
+    }
+
+    private static void printGroups() {
+        List<Group> groups = new GroupController().getGroups();
+        Iterator<Group> iterator = groups.iterator();
+        System.out.println("Groups:");
+        while (iterator.hasNext()) {
+            Group groupToPrint = iterator.next();
+            System.out.println(groupToPrint.getName() + " with identificator " + groupToPrint.getId());
         }
         System.out.println();
     }

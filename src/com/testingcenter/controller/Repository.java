@@ -14,6 +14,12 @@ public class Repository {
     private static List<Test> tests;
     private static List<Assignment> assignments;
     private static List<TestQuestion> questions;
+    private static List<Group> groups;
+    private static List<TestResult> results;
+
+    public static List<TestResult> getResults() {
+        return results;
+    }
 
     /**
      * Method to initialize data of users, tests,questions and assignments.Later it will upload data from in memory database
@@ -47,12 +53,40 @@ public class Repository {
 
         questions = new LinkedList<TestQuestion>();
         String[] answersForQuestion1 = {"6", "7", "8"};
-        TestQuestion question1 = new TestQuestion("How many primitive data types in Java?", test1, answersForQuestion1, 2);
+        TestQuestion question1 = new TestQuestion("How many primitive data types in Java?", test1, answersForQuestion1, 2, 3);
+
         questions.add(question1);
 
         String[] answersForQuestion2 = {"Yes", "No"};
-        TestQuestion question2 = new TestQuestion("Will you go to gym tomorrow?", test3, answersForQuestion2, 0);
+        TestQuestion question2 = new TestQuestion("Will you go to gym tomorrow?", test3, answersForQuestion2, 0, 1);
         questions.add(question2);
+
+        String[] answersForQuestion3 = {"System.out.print()", "printf()", "cout>>"};
+        TestQuestion question3 = new TestQuestion("How to print in console?", test1, answersForQuestion3, 0, 2);
+        questions.add(question3);
+        groups = new LinkedList<>();
+        Group group1 = new Group("Group 420", 1);
+        Group group2 = new Group("Group 322", 2);
+        groups.add(group1);
+        groups.add(group2);
+
+        student1.setGroup(1);
+        student2.setGroup(1);
+        Student student3 = new Student("Petr", "Petrov", "petya", "petro");
+        Student student4 = new Student("Victor", "Nurgaliev", "vic", "Victory");
+        users.add(student3);
+        users.add(student4);
+        student3.setGroup(2);
+        student4.setGroup(2);
+        TestResult testResult1 = new TestResult(student1, test1, 4);
+        TestResult testResult2 = new TestResult(student2, test1, 3);
+        TestResult testResult3 = new TestResult(student3, test1, 5);
+        TestResult testResult4 = new TestResult(student4, test1, 1);
+        results = new LinkedList<>();
+        results.add(testResult1);
+        results.add(testResult2);
+        results.add(testResult3);
+        results.add(testResult4);
     }
 
     /**
@@ -91,4 +125,12 @@ public class Repository {
         return questions;
     }
 
+    /**
+     * Method to get collection of groups
+     *
+     * @return List of groups
+     */
+    public static List<Group> getGroups() {
+        return groups;
+    }
 }
