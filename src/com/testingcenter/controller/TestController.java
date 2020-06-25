@@ -84,12 +84,13 @@ public class TestController {
      */
     public int getTestMaxPoints(Test test) {
         int points = 0;
-        List<TestQuestion> testQuestions = Repository.getQuestions();
-        Iterator<TestQuestion> iterator = testQuestions.iterator();
+        List<TestQuestion> list = Repository.getQuestions();
+        Iterator<TestQuestion> iterator = list.iterator();
+        TestQuestionController qController = new TestQuestionController();
         while (iterator.hasNext()) {
-            TestQuestion testQuestion = iterator.next();
-            if (testQuestion.getQuestionTest() == test) {
-                points += testQuestion.getPoints();
+            TestQuestion question = iterator.next();
+            if (question.getQuestionTest() == test) {
+                points += qController.getQuestionMaxPoints(question);
             }
         }
         return points;

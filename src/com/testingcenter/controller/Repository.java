@@ -16,7 +16,22 @@ public class Repository {
     private static List<TestQuestion> questions;
     private static List<Group> groups;
     private static List<TestResult> results;
+    private static List<QuestionAnswer> questionAnswers;
 
+    /**
+     * Method to get all question answers from repository
+     *
+     * @return Collection of question answers
+     */
+    public static List<QuestionAnswer> getQuestionAnswers() {
+        return questionAnswers;
+    }
+
+    /**
+     * Method to get all results from repository
+     *
+     * @return Collection of results
+     */
     public static List<TestResult> getResults() {
         return results;
     }
@@ -51,19 +66,26 @@ public class Repository {
         assignments.add(assignment1);
         assignments.add(assignment2);
 
-        questions = new LinkedList<TestQuestion>();
-        String[] answersForQuestion1 = {"6", "7", "8"};
-        TestQuestion question1 = new TestQuestion("How many primitive data types in Java?", test1, answersForQuestion1, 2, 3);
+        questions = new LinkedList<>();
+        questionAnswers = new LinkedList<>();
+        TestQuestion question1 = new TestQuestion("How many primitive data types in Java?", test1);
 
+        questionAnswers.add(new QuestionAnswer("6", 0, question1, 1));
+        questionAnswers.add(new QuestionAnswer("7", 0, question1, 2));
+        questionAnswers.add(new QuestionAnswer("8", 3, question1, 3));
         questions.add(question1);
 
-        String[] answersForQuestion2 = {"Yes", "No"};
-        TestQuestion question2 = new TestQuestion("Will you go to gym tomorrow?", test3, answersForQuestion2, 0, 1);
+        TestQuestion question2 = new TestQuestion("Will you go to gym tomorrow?", test3);
+        questionAnswers.add(new QuestionAnswer("Yes", 2, question2, 4));
+        questionAnswers.add(new QuestionAnswer("No", 1, question2, 5));
         questions.add(question2);
 
-        String[] answersForQuestion3 = {"System.out.print()", "printf()", "cout>>"};
-        TestQuestion question3 = new TestQuestion("How to print in console?", test1, answersForQuestion3, 0, 2);
+        TestQuestion question3 = new TestQuestion("How to print in console?", test1);
+        questionAnswers.add(new QuestionAnswer("System.out.print()", 3, question3, 6));
+        questionAnswers.add(new QuestionAnswer("printf()", 0, question3, 7));
+        questionAnswers.add(new QuestionAnswer("cout>>", 0, question3, 8));
         questions.add(question3);
+
         groups = new LinkedList<>();
         Group group1 = new Group("Group 420", 1);
         Group group2 = new Group("Group 322", 2);
@@ -133,4 +155,5 @@ public class Repository {
     public static List<Group> getGroups() {
         return groups;
     }
+
 }

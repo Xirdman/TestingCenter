@@ -5,16 +5,40 @@ package com.testingcenter.model;
  */
 public class QuestionAnswer {
     private String text;
-    private boolean isCorrect;
+    private int points;
+    private TestQuestion question;
+    private int questionId;
 
     /**
-     * Constructor for test question answer
+     * Constructor of class
      *
-     * @param text      Text of answer
-     * @param isCorrect is this answer correct or not
+     * @param text       text of answer
+     * @param points     points for chosing this answer
+     * @param question   Question of this answer
+     * @param questionId Identificator of answer
      */
-    public QuestionAnswer(String text, boolean isCorrect) {
+    public QuestionAnswer(String text, int points, TestQuestion question, int questionId) {
         this.text = text;
-        this.isCorrect = isCorrect;
+        this.points = points;
+        this.question = question;
+        this.questionId = questionId;
+    }
+
+    /**
+     * Method to get question of this answer
+     *
+     * @return
+     */
+    public TestQuestion getQuestion() {
+        return question;
+    }
+
+    /**
+     * Mathod to get points for choosing this answer
+     *
+     * @return
+     */
+    public int getPoints() {
+        return points;
     }
 }
