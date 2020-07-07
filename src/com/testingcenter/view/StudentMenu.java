@@ -5,6 +5,7 @@ import com.testingcenter.controller.StudentContoller;
 import com.testingcenter.controller.TestController;
 import com.testingcenter.model.Student;
 import com.testingcenter.model.Test;
+import com.testingcenter.model.TestQuestion;
 
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.Scanner;
 
 /**
  * View class for admin menu
+ *
+ * @author Matveev Alexander
  */
 public class StudentMenu {
     /**
@@ -22,7 +25,7 @@ public class StudentMenu {
     public static void showFirstScreen(Student student) {
         System.out.print("Choose options you want to do \n");
         System.out.print("1 - Watch your tests and how many questions in it \n");
-        System.out.println("2 - For complete test");
+        System.out.println("2 - To complete test");
         System.out.print("3 - Log out \n");
         System.out.print("4 - Exit \n");
         Scanner scanner = new Scanner(System.in);
@@ -56,9 +59,7 @@ public class StudentMenu {
 
     private static void printTests(Student student) {
         List<Test> studentTests = new StudentContoller().getStudentTests(student);
-        Iterator<Test> iterator = studentTests.iterator();
-        while (iterator.hasNext()) {
-            Test test = iterator.next();
+        for (Test test : studentTests) {
             System.out.print(test.getName() + " " + new TestController().getQuestionNumber(test));
         }
     }
@@ -79,7 +80,7 @@ public class StudentMenu {
         int i = 1;
         while (iterator1.hasNext()) {
             Test test = iterator1.next();
-            System.out.println(i + " - for complete " + test.getName());
+            System.out.println(i + " - to complete " + test.getName());
             i++;
         }
         Scanner scanner = new Scanner(System.in);
@@ -87,23 +88,19 @@ public class StudentMenu {
         try {
             choosenTestPosition = Integer.parseInt(scanner.next());
         } catch (Exception e) {
-            System.out.println("Waiting for yourchoise from 1 to " + i + " or 0 to go to student screen");
+            System.out.println("Waiting for your choice from 1 to " + i + " or 0 to go to student screen");
         }
         if (choosenTestPosition > 0) {
-            int k = 1;
-            Iterator<Test> iterator2 = studentUncompletedTests.iterator();
-            while (iterator2.hasNext()) {
-                Test test = iterator2.next();
-                if (k == choosenTestPosition) {
-                    completeTest(student, test);
-                }
-                k++;
-            }
+            completeTest(student, studentUncompletedTests.get(choosenTestPosition - 1));
         }
     }
 
     private static void completeTest(Student student, Test test) {
-
+        List<TestQuestion> questions = new TestController().getQuestionsForStudentFromTest(test, student);
+        for (TestQuestion question : questions) {
+            System.out.println(question.getQuestionText());
+        }
+        System.out.println();
     }
 
 }

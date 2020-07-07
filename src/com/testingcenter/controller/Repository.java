@@ -2,11 +2,13 @@ package com.testingcenter.controller;
 
 import com.testingcenter.model.*;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class for data
+ *
+ * @author Matveev Alexander
  */
 public class Repository {
 
@@ -17,6 +19,16 @@ public class Repository {
     private static List<Group> groups;
     private static List<TestResult> results;
     private static List<QuestionAnswer> questionAnswers;
+    private static List<StudentAnswerForTestQuestion> studentAnswers;
+
+    /**
+     * Method to get all student answers for questions of test
+     *
+     * @return Collection of answers for questions
+     */
+    public static List<StudentAnswerForTestQuestion> getStudentAnswers() {
+        return studentAnswers;
+    }
 
     /**
      * Method to get all question answers from repository
@@ -40,19 +52,19 @@ public class Repository {
      * Method to initialize data of users, tests,questions and assignments.Later it will upload data from in memory database
      */
     public static void initialize() {
-        users = new LinkedList<>();
+        users = new ArrayList<>();
         Teacher teacher1 = new Teacher("Dmitriy", "Bykovets", "login", "password");
         Teacher teacher2 = new Teacher("Arnold", "Shcwarzeneger", "kabuto", "perpeto");
         users.add(teacher1);
         users.add(teacher2);
 
-        Student student1 = new Student("Ivan", "Ivanov", "Ivan", "123");
+        Student student1 = new Student("Ivan", "Ivanov", "ivan", "123");
         Student student2 = new Student("Sergey", "Sergeevich", "Sergey", "qwerty");
         users.add(student1);
         users.add(student2);
         users.add(new Admin("Vladimir", "Putin", "admin", "admin"));
 
-        tests = new LinkedList<Test>();
+        tests = new ArrayList<>();
         Test test1 = new Test("JavaSE", teacher1);
         Test test2 = new Test("JavaEE", teacher1);
         Test test3 = new Test("Bodybuilding", teacher2);
@@ -62,12 +74,16 @@ public class Repository {
 
         Assignment assignment1 = new Assignment(student1, test1);
         Assignment assignment2 = new Assignment(student2, test2, true);
-        assignments = new LinkedList<Assignment>();
+        Assignment assignment3 = new Assignment(student1, test2);
+        Assignment assignment4 = new Assignment(student1, test3);
+        assignments = new ArrayList<>();
         assignments.add(assignment1);
         assignments.add(assignment2);
+        assignments.add(assignment3);
+        assignments.add(assignment4);
 
-        questions = new LinkedList<>();
-        questionAnswers = new LinkedList<>();
+        questions = new ArrayList<>();
+        questionAnswers = new ArrayList<>();
         TestQuestion question1 = new TestQuestion("How many primitive data types in Java?", test1);
 
         questionAnswers.add(new QuestionAnswer("6", 0, question1, 1));
@@ -86,7 +102,7 @@ public class Repository {
         questionAnswers.add(new QuestionAnswer("cout>>", 0, question3, 8));
         questions.add(question3);
 
-        groups = new LinkedList<>();
+        groups = new ArrayList<>();
         Group group1 = new Group("Group 420", 1);
         Group group2 = new Group("Group 322", 2);
         groups.add(group1);
@@ -104,11 +120,13 @@ public class Repository {
         TestResult testResult2 = new TestResult(student2, test1, 3);
         TestResult testResult3 = new TestResult(student3, test1, 5);
         TestResult testResult4 = new TestResult(student4, test1, 1);
-        results = new LinkedList<>();
+        results = new ArrayList<>();
         results.add(testResult1);
         results.add(testResult2);
         results.add(testResult3);
         results.add(testResult4);
+
+        studentAnswers = new ArrayList<>();
     }
 
     /**

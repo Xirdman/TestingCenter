@@ -2,6 +2,8 @@ package com.testingcenter.model;
 
 /**
  * Model class for assignment test to student
+ *
+ * @author Matveev Alexander
  */
 public class Assignment {
     private Student student;

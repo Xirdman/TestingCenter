@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 /**
  * View class for log in user
+ *
+ * @author Matveev Alexander
  */
 public class Menu {
     /**

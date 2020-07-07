@@ -4,7 +4,7 @@ import com.testingcenter.Main;
 import com.testingcenter.controller.GroupController;
 import com.testingcenter.controller.TestController;
 import com.testingcenter.model.Group;
-import com.testingcenter.model.StudentRatingDto;
+import com.testingcenter.model.Student;
 import com.testingcenter.model.Teacher;
 import com.testingcenter.model.Test;
 
@@ -14,6 +14,8 @@ import java.util.Scanner;
 
 /**
  * View class for Teacher User
+ *
+ * @author Matveev Alexander
  */
 public class TeacherMenu {
     /**
@@ -79,19 +81,18 @@ public class TeacherMenu {
         Scanner scanner = new Scanner(System.in);
         int groupId = Integer.parseInt(scanner.next());
         if (new GroupController().isGroupExists(groupId)) {
-            printGroupRaitingDesc(groupId);
+            printGroupRatingDesc(groupId);
         }
         System.out.println();
     }
 
-    private static void printGroupRaitingDesc(int groupId) {
+    private static void printGroupRatingDesc(int groupId) {
         System.out.println(groupId + " raitings are:");
-        List<StudentRatingDto> list = new GroupController().getGroupRaitings(groupId);
-        Iterator<StudentRatingDto> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            StudentRatingDto dto = iterator.next();
-            System.out.print(dto.getStudent().getFirstName() + " с рейтингом " + dto.getRating() + "\n");
+        List<Student> students = new GroupController().getGroupRatings(groupId);
+        for (Student student : students) {
+            System.out.println(student.getFirstName() + " have rating " + student.getRating());
         }
+        System.out.println();
     }
 
     private static void printGroups() {

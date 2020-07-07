@@ -2,6 +2,8 @@ package com.testingcenter.model;
 
 /**
  * Model class for Test
+ *
+ * @author Matveev Alexander
  */
 public class Test {
     private String name;

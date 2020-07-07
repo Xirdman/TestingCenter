@@ -2,6 +2,8 @@ package com.testingcenter.model;
 
 /**
  * Class representing student group
+ *
+ * @author Matveev Alexander
  */
 public class Group {
     private String name;

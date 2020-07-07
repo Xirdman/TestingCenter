@@ -2,68 +2,60 @@ package com.testingcenter.controller;
 
 import com.testingcenter.model.Group;
 import com.testingcenter.model.Student;
-import com.testingcenter.model.StudentRatingDto;
 import com.testingcenter.model.User;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Class to make business logic with Student user
+ *
+ * @author Matveev Alexander
  */
 public class GroupController {
+    /**
+     * Method to get all students by group
+     *
+     * @param groupId identifier of group
+     * @return Collection of students
+     */
     public List<Student> getStudentsByGroup(int groupId) {
-        List<Student> studentsList = new LinkedList<>();
+        List<Student> studentsList = new ArrayList<>();
         List<User> list = Repository.getUsers();
-        Iterator<User> userIterator = list.iterator();
-        while (userIterator.hasNext()) {
-            User user = userIterator.next();
-            if (user instanceof Student) {
-                if (((Student) user).getGroupId() == groupId) {
+        for (User user : list)
+            if (user instanceof Student)
+                if (((Student) user).getGroupId() == groupId)
                     studentsList.add((Student) user);
-                }
-            }
-        }
         return studentsList;
     }
 
     /**
-     * Method to get all raiting of students in group
+     * Method to get all rating of students in group
      *
-     * @param groupId identificator number of group
-     * @return List of data tranfer objects with Srudent and his raiting
+     * @param groupId identifier number of group
+     * @return List of students sorted descend by rating
      */
-    public List<StudentRatingDto> getGroupRaitings(int groupId) {
-        List<StudentRatingDto> studentsRaitings = new LinkedList<>();
+    public List<Student> getGroupRatings(int groupId) {
         List<Student> students = new GroupController().getStudentsByGroup(groupId);
-        Iterator<Student> iterator = students.iterator();
-        while (iterator.hasNext()) {
-            Student student = iterator.next();
-            studentsRaitings.add(new StudentRatingDto(student,
-                    new StudentContoller().getRaiting(student)));
-        }
-        Collections.sort(studentsRaitings,
-                (a, b) -> a.getRating() > b.getRating() ? -1 : a.getRating() == b.getRating() ? 0 : 1);
-        return studentsRaitings;
+        StudentContoller studentContoller = new StudentContoller();
+        for (Student student : students)
+            studentContoller.setRating(student);
+        students.sort((a, b) -> Double.compare(b.getRating(), a.getRating()));
+        return students;
     }
 
     /**
      * Method to check if group with such group id exists
      *
-     * @param groupId group id to check exist or not
+     * @param groupId group identifier to check exist or not
      * @return true if group exist false if not
      */
     public boolean isGroupExists(int groupId) {
         List<Group> groups = Repository.getGroups();
-        Iterator<Group> iterator = groups.iterator();
-        while (iterator.hasNext()) {
-            Group group = iterator.next();
+        for (Group group : groups)
             if (group.getId() == groupId) {
                 return true;
             }
-        }
         return false;
     }
 

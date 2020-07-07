@@ -1,7 +1,7 @@
 package com.testingcenter.model;
 
 /**
- * Class for single answer for test question
+ * Class represent single answer for test question
  */
 public class QuestionAnswer {
     private String text;
@@ -27,16 +27,16 @@ public class QuestionAnswer {
     /**
      * Method to get question of this answer
      *
-     * @return
+     * @return return question of this answer
      */
     public TestQuestion getQuestion() {
         return question;
     }
 
     /**
-     * Mathod to get points for choosing this answer
+     * Method to get points for choosing this answer
      *
-     * @return
+     * @return method returns points for choosing this as answer
      */
     public int getPoints() {
         return points;

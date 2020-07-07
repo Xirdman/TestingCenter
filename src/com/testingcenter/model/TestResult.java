@@ -2,6 +2,8 @@ package com.testingcenter.model;
 
 /**
  * Model class to storage student completed test and result for test
+ *
+ * @author Matveev Alexander
  */
 public class TestResult {
     private Student student;

@@ -2,9 +2,12 @@ package com.testingcenter.model;
 
 /**
  * Model class for Admin user
+ *
+ * @author Matveev Alexander
  */
 public class Student extends User {
     private int groupId;
+    private double rating;
 
     /**
      * Constructor for model class
@@ -48,5 +51,23 @@ public class Student extends User {
      */
     public void setGroup(int groupId) {
         this.groupId = groupId;
+    }
+
+    /**
+     * Getter for rating of Student
+     *
+     * @return rating of Student
+     */
+    public double getRating() {
+        return rating;
+    }
+
+    /**
+     * Setter for student rating
+     *
+     * @param rating rating of student
+     */
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }

@@ -2,6 +2,8 @@ package com.testingcenter.model;
 
 /**
  * Model class for Admin user
+ *
+ * @author Matveev Alexander
  */
 public class Admin extends User {
     /**

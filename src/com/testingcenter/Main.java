@@ -10,12 +10,13 @@ import com.testingcenter.view.Menu;
 import com.testingcenter.view.StudentMenu;
 import com.testingcenter.view.TeacherMenu;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Class with static collections and entry point
+ * Entry point for program
+ *
+ * @author Matveev Alexander
  */
 public class Main {
 
@@ -57,13 +58,9 @@ public class Main {
 
     private static Optional<User> logIn(String login, String password) {
         List<User> users = Repository.getUsers();
-        Iterator<User> iterator = users.iterator();
-        while (iterator.hasNext()) {
-            User user = iterator.next();
-            if (user.getLogin().equals(login) && (user.getPassword().equals(password))) {
+        for (User user : users)
+            if (user.getLogin().equals(login) && (user.getPassword().equals(password)))
                 return Optional.of(user);
-            }
-        }
         return Optional.ofNullable(null);
     }
 }

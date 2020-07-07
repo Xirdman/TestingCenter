@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Class to make business logic with Admin user
+ *
+ * @author Matveev Alexander
  */
 public class AdminController {
     /**

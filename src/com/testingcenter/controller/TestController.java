@@ -1,16 +1,14 @@
 package com.testingcenter.controller;
 
-import com.testingcenter.model.Assignment;
-import com.testingcenter.model.Teacher;
-import com.testingcenter.model.Test;
-import com.testingcenter.model.TestQuestion;
+import com.testingcenter.model.*;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Class to make business logic with tests
+ *
+ * @author Matveev Alexander
  */
 public class TestController {
     /**
@@ -22,13 +20,9 @@ public class TestController {
     public List<Test> getTeachersTests(Teacher teacher) {
         List<Test> tests = Repository.getTests();
         List<Test> result = new LinkedList<>();
-        Iterator<Test> iterator = tests.iterator();
-        while (iterator.hasNext()) {
-            Test test = iterator.next();
-            if (test.getTeacher() == teacher) {
+        for (Test test : tests)
+            if (test.getTeacher() == teacher)
                 result.add(test);
-            }
-        }
         return result;
     }
 
@@ -42,14 +36,11 @@ public class TestController {
         int allTests = 0;
         int completedTests = 0;
         List<Assignment> assignments = Repository.getAssignments();
-        Iterator<Assignment> iterator = assignments.iterator();
-        while (iterator.hasNext()) {
-            Assignment assignment = iterator.next();
+        for (Assignment assignment : assignments)
             if (assignment.getTest() == test) {
                 allTests++;
                 if (assignment.isComlpeted()) completedTests++;
             }
-        }
         if (allTests > 0) {
             return completedTests + "/" + allTests + " completed";
         } else {
@@ -66,13 +57,9 @@ public class TestController {
     public int getQuestionNumber(Test test) {
         int i = 0;
         List<TestQuestion> questions = Repository.getQuestions();
-        Iterator<TestQuestion> iterator = questions.iterator();
-        while (iterator.hasNext()) {
-            TestQuestion question = iterator.next();
-            if (question.getQuestionTest() == test) {
+        for (TestQuestion question : questions)
+            if (question.getQuestionTest() == test)
                 i++;
-            }
-        }
         return i;
     }
 
@@ -85,14 +72,28 @@ public class TestController {
     public int getTestMaxPoints(Test test) {
         int points = 0;
         List<TestQuestion> list = Repository.getQuestions();
-        Iterator<TestQuestion> iterator = list.iterator();
         TestQuestionController qController = new TestQuestionController();
-        while (iterator.hasNext()) {
-            TestQuestion question = iterator.next();
-            if (question.getQuestionTest() == test) {
+        for (TestQuestion question : list)
+            if (question.getQuestionTest() == test)
                 points += qController.getQuestionMaxPoints(question);
+        return points;
+    }
+
+    /**
+     * Method get all unanswered questions from test for student
+     *
+     * @param test    test to get questions from
+     * @param student student who got unanswered questions of test
+     * @return Collection of unanswered questions
+     */
+    public List<TestQuestion> getQuestionsForStudentFromTest(Test test, Student student) {
+        List<TestQuestion> questions = Repository.getQuestions();
+        List<TestQuestion> result = new LinkedList<>();
+        for (TestQuestion question : questions) {
+            if (question.getQuestionTest() == test) {
+                result.add(question);
             }
         }
-        return points;
+        return result;
     }
 }

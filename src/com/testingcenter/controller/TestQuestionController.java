@@ -3,11 +3,12 @@ package com.testingcenter.controller;
 import com.testingcenter.model.QuestionAnswer;
 import com.testingcenter.model.TestQuestion;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * Class to work with test question
+ *
+ * @author Matveev Alexander
  */
 public class TestQuestionController {
     /**
@@ -19,9 +20,7 @@ public class TestQuestionController {
     public int getQuestionMaxPoints(TestQuestion question) {
         int points = 0;
         List<QuestionAnswer> list = Repository.getQuestionAnswers();
-        Iterator<QuestionAnswer> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            QuestionAnswer questionAnswer = iterator.next();
+        for (QuestionAnswer questionAnswer : list) {
             if (questionAnswer.getQuestion() == question) {
                 points += questionAnswer.getPoints();
             }

@@ -2,6 +2,8 @@ package com.testingcenter.model;
 
 /**
  * Model class for single Question from test
+ *
+ * @author Matveev Alexander
  */
 public class TestQuestion {
     private String questionText;
@@ -25,5 +27,14 @@ public class TestQuestion {
      */
     public Test getQuestionTest() {
         return questionTest;
+    }
+
+    /**
+     * Method to get text of question
+     *
+     * @return text of question
+     */
+    public String getQuestionText() {
+        return questionText;
     }
 }
