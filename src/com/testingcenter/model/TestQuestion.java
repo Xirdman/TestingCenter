@@ -6,6 +6,7 @@ package com.testingcenter.model;
  * @author Matveev Alexander
  */
 public class TestQuestion {
+    private int id;
     private String questionText;
     private Test questionTest;
 
@@ -15,9 +16,10 @@ public class TestQuestion {
      * @param questionText text of question
      * @param questionTest test of this question
      */
-    public TestQuestion(String questionText, Test questionTest) {
+    public TestQuestion(String questionText, Test questionTest, int id) {
         this.questionText = questionText;
         this.questionTest = questionTest;
+        this.id = id;
     }
 
     /**
@@ -36,5 +38,14 @@ public class TestQuestion {
      */
     public String getQuestionText() {
         return questionText;
+    }
+
+    /**
+     * Method to get identificator of test
+     *
+     * @return identificator of test
+     */
+    public int getId() {
+        return id;
     }
 }

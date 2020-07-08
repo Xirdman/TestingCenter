@@ -7,7 +7,7 @@ public class QuestionAnswer {
     private String text;
     private int points;
     private TestQuestion question;
-    private int questionId;
+    private int answerId;
 
     /**
      * Constructor of class
@@ -21,7 +21,25 @@ public class QuestionAnswer {
         this.text = text;
         this.points = points;
         this.question = question;
-        this.questionId = questionId;
+        this.answerId = questionId;
+    }
+
+    /**
+     * Method to get text of answer
+     *
+     * @return text of answer
+     */
+    public String getText() {
+        return text;
+    }
+
+    /**
+     * Method to get identifier of question answer
+     *
+     * @return question identifier
+     */
+    public int getAnswerId() {
+        return answerId;
     }
 
     /**

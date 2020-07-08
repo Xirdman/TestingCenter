@@ -8,6 +8,7 @@ package com.testingcenter.model;
 public class Test {
     private String name;
     private Teacher teacher;
+    private double coefficientToPass;
 
     /**
      * Constructor
@@ -18,6 +19,7 @@ public class Test {
     public Test(String name, Teacher teacher) {
         this.name = name;
         this.teacher = teacher;
+        coefficientToPass = 0.66;
     }
 
     /**
@@ -36,5 +38,14 @@ public class Test {
      */
     public Teacher getTeacher() {
         return teacher;
+    }
+
+    /**
+     * Method to get coefficient to pass the test
+     *
+     * @return coefficient to pass test
+     */
+    public double getCoefficientToPass() {
+        return coefficientToPass;
     }
 }

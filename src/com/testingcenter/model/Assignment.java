@@ -33,8 +33,17 @@ public class Assignment {
      *
      * @return true if test completed false is test uncomplited
      */
-    public boolean isComlpeted() {
+    public boolean getIsCompleted() {
         return isComlpeted;
+    }
+
+    /**
+     * Method sets isCompleted boolean value
+     *
+     * @param isComlpeted is assignment completed
+     */
+    public void setIsCompleted(boolean isComlpeted) {
+        this.isComlpeted = isComlpeted;
     }
 
     /**

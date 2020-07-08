@@ -84,38 +84,41 @@ public class Repository {
 
         questions = new ArrayList<>();
         questionAnswers = new ArrayList<>();
-        TestQuestion question1 = new TestQuestion("How many primitive data types in Java?", test1);
-
-        questionAnswers.add(new QuestionAnswer("6", 0, question1, 1));
-        questionAnswers.add(new QuestionAnswer("7", 0, question1, 2));
-        questionAnswers.add(new QuestionAnswer("8", 3, question1, 3));
+        int testQuestionIdCounter = 0;
+        TestQuestion question1 = new TestQuestion("How many primitive data types in Java?", test1, testQuestionIdCounter++);
+        int answerId = 0;
+        //Negative points just to prevent situations where student can choose all the answers for question and get points
+        questionAnswers.add(new QuestionAnswer("6", -2, question1, answerId++));
+        questionAnswers.add(new QuestionAnswer("7", -2, question1, answerId++));
+        questionAnswers.add(new QuestionAnswer("8", 3, question1, answerId++));
         questions.add(question1);
 
-        TestQuestion question2 = new TestQuestion("Will you go to gym tomorrow?", test3);
-        questionAnswers.add(new QuestionAnswer("Yes", 2, question2, 4));
-        questionAnswers.add(new QuestionAnswer("No", 1, question2, 5));
+        TestQuestion question2 = new TestQuestion("Will you go to gym tomorrow?", test3, testQuestionIdCounter++);
+        questionAnswers.add(new QuestionAnswer("Yes", 2, question2, answerId++));
+        questionAnswers.add(new QuestionAnswer("No", -2, question2, answerId++));
         questions.add(question2);
 
-        TestQuestion question3 = new TestQuestion("How to print in console?", test1);
-        questionAnswers.add(new QuestionAnswer("System.out.print()", 3, question3, 6));
-        questionAnswers.add(new QuestionAnswer("printf()", 0, question3, 7));
-        questionAnswers.add(new QuestionAnswer("cout>>", 0, question3, 8));
+        TestQuestion question3 = new TestQuestion("How to print in console?", test1, testQuestionIdCounter++);
+        questionAnswers.add(new QuestionAnswer("System.out.print()", 3, question3, answerId++));
+        questionAnswers.add(new QuestionAnswer("printf()", -2, question3, answerId++));
+        questionAnswers.add(new QuestionAnswer("cout>>", -2, question3, answerId++));
         questions.add(question3);
 
+        int groupIdCounter = 0;
         groups = new ArrayList<>();
-        Group group1 = new Group("Group 420", 1);
-        Group group2 = new Group("Group 322", 2);
+        Group group1 = new Group("Group 420", groupIdCounter++);
+        Group group2 = new Group("Group 322", groupIdCounter++);
         groups.add(group1);
         groups.add(group2);
 
-        student1.setGroup(1);
-        student2.setGroup(1);
+        student1.setGroup(0);
+        student2.setGroup(0);
         Student student3 = new Student("Petr", "Petrov", "petya", "petro");
         Student student4 = new Student("Victor", "Nurgaliev", "vic", "Victory");
         users.add(student3);
         users.add(student4);
-        student3.setGroup(2);
-        student4.setGroup(2);
+        student3.setGroup(1);
+        student4.setGroup(1);
         TestResult testResult1 = new TestResult(student1, test1, 4);
         TestResult testResult2 = new TestResult(student2, test1, 3);
         TestResult testResult3 = new TestResult(student3, test1, 5);
@@ -173,5 +176,4 @@ public class Repository {
     public static List<Group> getGroups() {
         return groups;
     }
-
 }
