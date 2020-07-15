@@ -17,6 +17,10 @@ import java.util.Scanner;
  * @author Matveev Alexander
  */
 public class StudentMenu {
+    private static StudentContoller studentContoller = new StudentContoller();
+    private static TestController testController = new TestController();
+    private static TestQuestionController testQuestionController = new TestQuestionController();
+
     /**
      * First Screen of student menu after log in
      *
@@ -68,7 +72,7 @@ public class StudentMenu {
     }
 
     private static void startCompleteTest(Student student) {
-        List<Test> list = new StudentContoller().getStudentTests(student);
+        List<Test> list = studentContoller.getStudentTests(student);
         if (list.isEmpty())
             System.out.println("You dont have any tests to complete\n");
         else
@@ -96,7 +100,7 @@ public class StudentMenu {
     }
 
     private static void completeTest(Student student, Test test) {
-        List<TestQuestion> questions = new TestController().getTestQuestions(test);
+        List<TestQuestion> questions = testController.getTestQuestions(test);
         boolean flag = true;
         for (TestQuestion question : questions) {
             if (!printAnswersForQuestion(question, student)) {
@@ -115,7 +119,6 @@ public class StudentMenu {
 
     private static boolean printAnswersForQuestion(TestQuestion question, Student student) {
         System.out.println("Question text: \n" + question.getQuestionText());
-        TestQuestionController testQuestionController = new TestQuestionController();
         List<QuestionAnswer> answers = testQuestionController.getQuestionAnswers(question);
         int i = 1;
         for (QuestionAnswer questionAnswer : answers) {
@@ -152,7 +155,6 @@ public class StudentMenu {
     private static void printResultsAfterTest(Assignment assignment) {
         Test test = assignment.getTest();
         Student student = assignment.getStudent();
-        TestController testController = new TestController();
         TestResult testResult = testController.createTestResult(student, test);
         int studentResult = testResult.getPoints();
         int maxTestPoints = testController.getTestMaxPoints(test);
@@ -168,9 +170,7 @@ public class StudentMenu {
     }
 
     private static void printQuestionsStats(Student student, Test test) {
-        TestController testController = new TestController();
         List<TestQuestion> questions = testController.getTestQuestions(test);
-        TestQuestionController testQuestionController = new TestQuestionController();
         for (TestQuestion question : questions) {
             List<QuestionAnswer> answers = testQuestionController.getQuestionAnswers(question);
             System.out.println("For question \"" + question.getQuestionText() + "\" correct answers were:");
@@ -179,7 +179,7 @@ public class StudentMenu {
                     System.out.println("\"" + answer.getText() + "\"" + " and give " + answer.getPoints() + " points\n");
                 }
             }
-            System.out.println("You answers were ");
+            System.out.print("Your answers were ");
             List<QuestionAnswer> studAnswers = testController.getStudentAnswersForQuestion(question, student);
             int pointsForStudAnswer = testController.getPointsForStudentAnswerForQuestion(studAnswers);
             for (QuestionAnswer studAnswer : studAnswers) {
@@ -188,5 +188,6 @@ public class StudentMenu {
             System.out.println("And this answer get you " + pointsForStudAnswer + " points\n");
         }
     }
+
 
 }

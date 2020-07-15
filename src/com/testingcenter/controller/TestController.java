@@ -198,8 +198,7 @@ public class TestController {
         int result = 0;
         for (QuestionAnswer questionAnswer : answers)
             result += questionAnswer.getPoints();
-        if (result > 0) return result;
-        else return 0;
+        return result > 0 ? result : 0;
     }
 
 }
